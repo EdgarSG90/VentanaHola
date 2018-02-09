@@ -6,10 +6,8 @@ public class VentanaLogin extends JFrame{
     public VentanaLogin(String titulo) {
         this.setTitle(titulo);
 
-        Container panelPrinc = f.getContentPane();
+        Container panelPrinc = this.getContentPane();
         panelPrinc.setBackground(Color.GREEN);
-        
-
     }
 
     public static void main(String[] args)
