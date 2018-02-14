@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 
 public class VentanaLogin extends JFrame{
 
+    JButton btnAceptar;
+    JButton btnCancelar;
+
     public VentanaLogin(String titulo) {
         this.setTitle(titulo);
         this.setResizable(false);
@@ -31,17 +34,17 @@ public class VentanaLogin extends JFrame{
         panelPrinc.add(edtClave);
 
         //Creación de objetos que generan eventos
-        JButton btnAceptar = new JButton("Aceptar");
+        btnAceptar = new JButton("Aceptar");
         btnAceptar.setBounds(40, 90, 80, 30);
         panelPrinc.add(btnAceptar);
 
-        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar = new JButton("Cancelar");
         btnCancelar.setBounds(130, 90, 80, 30);
         panelPrinc.add(btnCancelar);
 
         //Creación de oyentes
-        AccionBoton oyenteBtnAceptar = new AccionBoton();
-        AccionBoton oyenteBtnCancelar = new AccionBoton();
+        AccionBoton oyenteBtnAceptar = new AccionBoton(btnAceptar);
+        AccionBoton oyenteBtnCancelar = new AccionBoton(btnCancelar);
 
         //Vincular oyente al componente
         btnAceptar.addActionListener(oyenteBtnAceptar);
@@ -63,9 +66,20 @@ public class VentanaLogin extends JFrame{
 
 class AccionBoton implements ActionListener{
 
+    private JButton btnAcep;
+
+    public AccionBoton(JButton btnAcept){
+        this.btnAcep = btnAcept;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Presionaste un botón " + ((JButton) e.getSource()).getText());
+
+        if ( ((JButton) e.getSource()) == btnAcep){
+            System.out.println("Botón presionado es Aceptar");
+        }
+        else System.out.println("Botón presionado es Cancelar");
     }
 }
 
