@@ -5,8 +5,10 @@ import java.awt.event.ActionListener;
 
 public class VentanaLogin extends JFrame{
 
-    JButton btnAceptar;
-    JButton btnCancelar;
+    private JButton btnAceptar;
+    private JButton btnCancelar;
+    private JTextField edtUsuario;
+    private JTextField edtClave;
 
     public VentanaLogin(String titulo) {
         this.setTitle(titulo);
@@ -21,7 +23,7 @@ public class VentanaLogin extends JFrame{
         lblUsuario.setBounds(10, 10, 100, 30);
         panelPrinc.add(lblUsuario);
 
-        JTextField edtUsuario = new JTextField();
+        edtUsuario = new JTextField();
         edtUsuario.setBounds(120, 10, 100, 30);
         panelPrinc.add(edtUsuario);
 
@@ -29,7 +31,7 @@ public class VentanaLogin extends JFrame{
         lblClave.setBounds(10, 50, 100, 30);
         panelPrinc.add(lblClave);
 
-        JTextField edtClave = new JTextField();
+        edtClave = new JTextField();
         edtClave.setBounds(120, 50, 100, 30);
         panelPrinc.add(edtClave);
 
@@ -43,8 +45,8 @@ public class VentanaLogin extends JFrame{
         panelPrinc.add(btnCancelar);
 
         //Creación de oyentes
-        AccionBoton oyenteBtnAceptar = new AccionBoton(btnAceptar);
-        AccionBoton oyenteBtnCancelar = new AccionBoton(btnCancelar);
+        AccionBoton oyenteBtnAceptar = new AccionBoton();
+        AccionBoton oyenteBtnCancelar = new AccionBoton();
 
         //Vincular oyente al componente
         btnAceptar.addActionListener(oyenteBtnAceptar);
@@ -61,27 +63,31 @@ public class VentanaLogin extends JFrame{
 
         f.setVisible(true);
     }
-}
 
+    class AccionBoton implements ActionListener{
 
-class AccionBoton implements ActionListener{
+        @Override
+        //Método controlador del evento actionPerformed
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Presionaste un botón " + ((JButton) e.getSource()).getText());
 
-    private JButton btnAcep;
+            if ( ((JButton) e.getSource()) == btnAceptar){
+                System.out.println("Botón presionado es Aceptar");
 
-    public AccionBoton(JButton btnAcept){
-        this.btnAcep = btnAcept;
-    }
+                if ((edtUsuario.getText().contentEquals("admin"))
+                        && edtClave.getText().contentEquals("1234") ){
+                    System.out.println("Acceso concedido");
+                }
+                else System.out.println("Acceso denegado");
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Presionaste un botón " + ((JButton) e.getSource()).getText());
-
-        if ( ((JButton) e.getSource()) == btnAcep){
-            System.out.println("Botón presionado es Aceptar");
+            }
+            else System.out.println("Botón presionado es Cancelar");
         }
-        else System.out.println("Botón presionado es Cancelar");
-    }
-}
+    } //Clase AccionBoton
+
+} //Clase VentanaLogin
+
+
 
 
 
